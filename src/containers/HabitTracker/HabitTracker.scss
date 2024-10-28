@@ -19,4 +19,11 @@ $box-shadow-color: rgba(97, 0, 136, 0.25);
   background-color: $background-color;
   float: left;
   color: $text-color;
+  ul {
+    padding: 0;
+    li {
+      list-style: none;
+      margin-left: 50px;
+    }
+  }
 }
