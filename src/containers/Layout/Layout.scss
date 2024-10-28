@@ -1,0 +1,16 @@
+.Layout {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(252, 222, 184);
+  main {
+    display: flex;
+    flex-direction: row;
+  }
+  footer {
+    position: absolute;
+    bottom: 0;
+    width: 100vw;
+  }
+}

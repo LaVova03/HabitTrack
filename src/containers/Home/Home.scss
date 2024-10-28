@@ -1,0 +1,125 @@
+.Home {
+  position: relative;
+  min-height: 100vh;
+  background: rgb(13, 40, 17);
+  background: linear-gradient(
+    0deg,
+    rgba(13, 40, 17, 1) 0%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(6, 5, 14, 1) 0%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(5, 5, 14, 1) 0%,
+    rgba(139, 32, 32, 1) 0%,
+    rgba(0, 157, 232, 1) 100%,
+    rgba(170, 89, 89, 1) 100%
+  );
+  header {
+    position: relative;
+    width: 100%;
+    height: max-content;
+    padding: 20px 0;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    h1 {
+      position: absolute;
+      left: 50%;
+      font-size: 40px;
+      transform: translateX(-50%);
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+      background-image: linear-gradient(45deg, #ffffff, #7c007c);
+      background-clip: text;
+      color: transparent;
+    }
+  }
+  footer {
+    position: absolute;
+    width: max-content;
+    bottom: 5px;
+    font-size: 24px;
+    font-weight: 600;
+    height: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
+    background-image: linear-gradient(45deg, #1b007c, #ffffff);
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.Home > main > ul {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  margin: 0;
+  padding: 0;
+}
+
+.Home > main > ul > li {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+  padding: 0;
+  list-style: none;
+  height: max-content;
+  width: max-content;
+  cursor: pointer;
+  transition: 200ms;
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 220px;
+    height: 120px;
+    padding: 15px;
+    margin-top: 50px;
+    opacity: 0.6;
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    transition: 200ms;
+  }
+}
+
+.Home > main img {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  transition: 200ms;
+  -webkit-transition: 200ms;
+  -moz-transition: 200ms;
+  -ms-transition: 200ms;
+  -o-transition: 200ms;
+}
+
+.Home > main > ul > li:hover {
+  div {
+    width: 270px;
+    height: 170px;
+    font-size: 20px;
+  }
+  img {
+    height: 250px;
+    width: 250px;
+  }
+}

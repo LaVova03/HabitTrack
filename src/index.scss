@@ -1,0 +1,13 @@
+@font-face {
+  font-family: "Merriweather";
+  src: local("Merriweather"),
+    url(./assets/fonts/Merriweather/Merriweather-Regular.ttf) format(opentype);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Merriweather";
+  letter-spacing: 1px;
+}
