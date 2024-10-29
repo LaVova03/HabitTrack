@@ -5,11 +5,10 @@ $border-color: #7c007c;
 $box-shadow-color: rgba(97, 0, 136, 0.25);
 
 .HabitTracker {
-  padding: 20px 40px;
+  padding: 40px;
   margin: 16px 20px;
-  flex-direction: column;
   align-items: flex-start;
-  height: max-content;
+  flex: 1;
   gap: 16px;
   width: 75vw;
   min-height: 47vh;
@@ -19,11 +18,62 @@ $box-shadow-color: rgba(97, 0, 136, 0.25);
   background-color: $background-color;
   float: left;
   color: $text-color;
+  header {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+    margin-bottom: 10px;
+    h3 {
+      position: absolute;
+      left: 50%;
+      color: $text-hover-color;
+      transform: translateX(-50%);
+      width: max-content;
+      margin: 0 auto;
+      -webkit-transform: translateX(-50%);
+      -moz-transform: translateX(-50%);
+      -ms-transform: translateX(-50%);
+      -o-transform: translateX(-50%);
+    }
+  }
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    margin: 0 auto;
+  }
   ul {
     padding: 0;
+    width: 20vw;
+    margin: 20px;
     li {
+      display: flex;
+      align-items: center;
       list-style: none;
-      margin-left: 50px;
+      margin: 5px 30px;
+      &:first-child {
+        position: relative;
+        left: -30px;
+        justify-content: space-between;
+        div {
+          button {
+            background-color: inherit;
+            cursor: pointer;
+            border: 0;
+            width: max-content;
+            &:first-child {
+              margin-right: 2px;
+            }
+          }
+        }
+      }
+      &:last-child {
+        display: flex;
+        justify-content: space-between;
+        width: 240px;
+      }
     }
   }
 }
