@@ -11,10 +11,13 @@ import EditNoteIcon from "@mui/icons-material/EditNote";
 
 import { habitTracker as initialHabits } from "../../../public/data";
 import Modal from "../../components/Modal/Modal";
+import AlertDialog from "../../components/ConfirmModal/AlertDialog";
 
 function HabitTracker() {
   const [habitTracker, setHabitTracker] = useState(initialHabits);
   const [flag, setFlag] = useState<boolean>(false);
+  const [open, setOpen] = useState<boolean>(false);
+  const [deleteItem, setDeleteItem] = useState<number | null>(null);
 
   const handleCheckboxChange = (index: number) => {
     const updatedHabits = habitTracker.map((habit, i) => {
@@ -32,6 +35,13 @@ function HabitTracker() {
     }
   }, [flag, initialHabits]);
 
+  const ConfirmDeletHabit = () => {
+    if (deleteItem) {
+      habitTracker.splice(deleteItem, 1);
+      setFlag(true);
+    }
+  };
+
   return (
     <div className="HabitTracker">
       <header>
@@ -47,8 +57,8 @@ function HabitTracker() {
                 <div>
                   <button
                     onClick={() => {
-                      habitTracker.splice(i, 1);
-                      setFlag(true);
+                      setDeleteItem(i);
+                      setOpen(true);
                     }}
                   >
                     <DeleteForeverIcon color="error" />
@@ -89,6 +99,11 @@ function HabitTracker() {
           <div>No habits</div>
         )}
       </main>
+      <AlertDialog
+        open={open}
+        setOpen={setOpen}
+        ConfirmDeletHabit={ConfirmDeletHabit}
+      />
     </div>
   );
 }
