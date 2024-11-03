@@ -1,23 +1,37 @@
 import "./HabitTracker.scss";
 import { useEffect, useState } from "react";
 
+import { Button } from "@mui/material";
+import EditNoteIcon from "@mui/icons-material/EditNote";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
 import AccountTreeIcon from "@mui/icons-material/AccountTree";
 import CableIcon from "@mui/icons-material/Cable";
 import Checkbox from "@mui/material/Checkbox";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import EditNoteIcon from "@mui/icons-material/EditNote";
 
 import { habitTracker as initialHabits } from "../../../public/data";
 import Modal from "../../components/Modal/Modal";
 import AlertDialog from "../../components/ConfirmModal/AlertDialog";
+
+// Интерфейс для формы
+export interface Form {
+  id: number;
+  name: string;
+  time: string;
+  duration: string;
+  periodicity: string;
+  status: boolean;
+}
 
 function HabitTracker() {
   const [habitTracker, setHabitTracker] = useState(initialHabits);
   const [flag, setFlag] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [deleteItem, setDeleteItem] = useState<number | null>(null);
+  const [openCreate, setOpenCreate] = useState<boolean>(false);
+  const [openEdit, setOpenEdit] = useState<boolean>(false);
+  const [isIndex, setIndex] = useState<number | null>(null);
 
   const handleCheckboxChange = (index: number) => {
     const updatedHabits = habitTracker.map((habit, i) => {
@@ -33,12 +47,13 @@ function HabitTracker() {
     if (flag) {
       setFlag(false);
     }
-  }, [flag, initialHabits]);
+  }, [flag, initialHabits, habitTracker]);
 
   const ConfirmDeletHabit = () => {
-    if (deleteItem) {
+    if (deleteItem === 0 || deleteItem) {
       habitTracker.splice(deleteItem, 1);
       setFlag(true);
+      setDeleteItem(null);
     }
   };
 
@@ -46,7 +61,13 @@ function HabitTracker() {
     <div className="HabitTracker">
       <header>
         <h3>My habits</h3>
-        <Modal setFlag={setFlag} />
+        <Button
+          color="secondary"
+          variant="contained"
+          onClick={() => setOpenCreate(true)}
+        >
+          Create
+        </Button>
       </header>
       <main>
         {habitTracker && habitTracker.length > 0 ? (
@@ -63,9 +84,14 @@ function HabitTracker() {
                   >
                     <DeleteForeverIcon color="error" />
                   </button>
-                  <button>
-                    <EditNoteIcon color="primary" />
-                  </button>
+                  <EditNoteIcon
+                    color="primary"
+                    sx={{ cursor: "pointer" }}
+                    onClick={() => {
+                      setOpenEdit(true);
+                      setIndex(i);
+                    }}
+                  />
                 </div>
               </li>
               <li>
@@ -103,6 +129,15 @@ function HabitTracker() {
         open={open}
         setOpen={setOpen}
         ConfirmDeletHabit={ConfirmDeletHabit}
+      />
+      <Modal
+        open={openCreate}
+        openEdit={openEdit}
+        setOpen={setOpenCreate}
+        setOpenEdit={setOpenEdit}
+        isIndex={isIndex}
+        setFlag={setFlag}
+        setIndex={setIndex}
       />
     </div>
   );

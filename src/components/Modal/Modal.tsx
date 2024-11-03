@@ -1,15 +1,18 @@
 import "./Modal.scss";
 import React, { useEffect, useState } from "react";
-import Button from "@mui/material/Button";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogTitle from "@mui/material/DialogTitle";
-import Slide from "@mui/material/Slide";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Slide,
+  Box,
+  TextField,
+} from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
 import { habitTracker } from "../../../public/data";
+import { Form } from "../../containers/HabitTracker/HabitTracker";
 import * as yup from "yup";
 
 const getValidationSchema = () =>
@@ -18,7 +21,7 @@ const getValidationSchema = () =>
       .string()
       .required("Name is required")
       .matches(
-        /^[A-Za-z0-9!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/,
+        /^[A-Za-z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/,
         "Invalid characters in name"
       ),
     time: yup
@@ -28,40 +31,49 @@ const getValidationSchema = () =>
     duration: yup
       .string()
       .required("Duration is required")
-      .matches(/^[A-Za-z0-9]+$/, "Invalid characters in duration"),
+      .matches(/^\d+([.,]\d+)?\s*$/, "Invalid format for duration"),
     periodicity: yup
       .string()
       .required("Periodicity is required")
-      .matches(/^[A-Za-z0-9]+$/, "Invalid characters in periodicity"),
+      .matches(/^[A-Za-z0-9 ]+$/, "Invalid characters in periodicity"),
   });
-
 const validationSchema = getValidationSchema();
 
 const Transition = React.forwardRef(function Transition(
-  props: TransitionProps & {
-    children: React.ReactElement<any, any>;
-  },
+  props: TransitionProps & { children: React.ReactElement<any, any> },
   ref: React.Ref<unknown>
 ) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-interface Form {
-  id: number;
-  name: string;
-  time: string;
-  duration: string;
-  periodicity: string;
-  status: boolean;
-}
-
 interface ModalProps {
-  setFlag: (value: boolean) => void;
+  open?: boolean;
+  setOpen?: (open: boolean) => void;
+  openEdit?: boolean;
+  setOpenEdit?: (openEdit: boolean) => void;
+  isIndex?: number | null;
+  setFlag: (flag: boolean) => void;
+  setIndex: (index: number | null) => void;
 }
 
-function Modal({ setFlag }: ModalProps) {
-  const [open, setOpen] = React.useState(false);
+function Modal({
+  open,
+  openEdit,
+  setOpenEdit,
+  setOpen,
+  isIndex,
+  setFlag,
+  setIndex,
+}: ModalProps) {
   const [formData, setFormData] = useState<Form>({
+    id: habitTracker.length + 1,
+    name: "",
+    time: "",
+    duration: "",
+    periodicity: "",
+    status: false,
+  });
+  const [editFormData, setEditFormData] = useState<Form>({
     id: habitTracker.length + 1,
     name: "",
     time: "",
@@ -71,27 +83,47 @@ function Modal({ setFlag }: ModalProps) {
   });
   const [errors, setErrors] = useState<Partial<Record<keyof Form, string>>>({});
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = () => {
-    setOpen(false);
+    if (open && setOpen) {
+      setFormData({
+        id: habitTracker.length + 1,
+        name: "",
+        time: "",
+        duration: "",
+        periodicity: "",
+        status: false,
+      });
+      setOpen(false);
+    } else if (setOpenEdit) {
+      setOpenEdit(false);
+      setIndex(null);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
-    setFormData((prev) => ({ ...prev, [id]: value }));
+    if (open) {
+      setFormData((prev) => ({ ...prev, [id]: value }));
+    } else {
+      setEditFormData((prev) => ({ ...prev, [id]: value }));
+    }
   };
 
   const formSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
-      await validationSchema.validate(formData, { abortEarly: false });
-      habitTracker.push(formData);
-      setFlag(true);
-      setFormData({
+      await validationSchema.validate(open ? formData : editFormData, {
+        abortEarly: false,
+      });
+      if (open) {
+        habitTracker.push(formData);
+        setFlag(true);
+      } else if (isIndex || isIndex === 0) {
+        habitTracker.splice(isIndex, 1, editFormData);
+        setFlag(true);
+        setIndex(null);
+      }
+      (open ? setFormData : setEditFormData)({
         id: habitTracker.length + 1,
         name: "",
         time: "",
@@ -117,22 +149,23 @@ function Modal({ setFlag }: ModalProps) {
   };
 
   useEffect(() => {
-    console.log(habitTracker);
-  }, [habitTracker]);
+    if (isIndex || isIndex === 0) {
+      setEditFormData(habitTracker[isIndex]);
+    }
+  }, [isIndex]);
 
   return (
     <React.Fragment>
-      <Button color="secondary" variant="contained" onClick={handleClickOpen}>
-        Create
-      </Button>
       <Dialog
-        open={open}
+        open={open || openEdit || false}
         TransitionComponent={Transition}
         keepMounted
         onClose={handleClose}
         aria-describedby="alert-dialog-slide-description"
       >
-        <DialogTitle>{"Fill in the details"}</DialogTitle>
+        <DialogTitle>
+          {open ? "Fill in the details" : "Change the data"}
+        </DialogTitle>
         <DialogContent>
           <Box
             component="form"
@@ -153,7 +186,7 @@ function Modal({ setFlag }: ModalProps) {
               id="name"
               label="Habit Name"
               type="text"
-              value={formData.name}
+              value={open ? formData.name : editFormData.name}
               onChange={handleInputChange}
               error={!!errors.name}
               sx={{
@@ -167,7 +200,7 @@ function Modal({ setFlag }: ModalProps) {
               id="time"
               label="Habit Time"
               type="text"
-              value={formData.time}
+              value={open ? formData.time : editFormData.time}
               onChange={handleInputChange}
               error={!!errors.time}
               sx={{
@@ -181,7 +214,7 @@ function Modal({ setFlag }: ModalProps) {
               id="duration"
               label="Habit Duration"
               type="text"
-              value={formData.duration}
+              value={open ? formData.duration : editFormData.duration}
               onChange={handleInputChange}
               error={!!errors.duration}
               sx={{
@@ -195,7 +228,7 @@ function Modal({ setFlag }: ModalProps) {
               id="periodicity"
               label="Habit Periodicity"
               type="text"
-              value={formData.periodicity}
+              value={open ? formData.periodicity : editFormData.periodicity}
               onChange={handleInputChange}
               error={!!errors.periodicity}
               sx={{
