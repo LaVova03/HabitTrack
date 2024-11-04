@@ -1,0 +1,57 @@
+.Timer {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  width: 150px;
+  height: 150px;
+  padding: 30px;
+  background-color: black;
+  color: white;
+  box-shadow: 0 0 10px goldenrod;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  h2,
+  p,
+  button {
+    margin: 5px;
+  }
+  button {
+    cursor: pointer;
+    background-color: goldenrod;
+    width: 70px;
+    transition: 200ms;
+    -webkit-transition: 200ms;
+    -moz-transition: 200ms;
+    -ms-transition: 200ms;
+    -o-transition: 200ms;
+    &:hover {
+      color: white;
+    }
+    &:last-child {
+      background-color: inherit;
+      border: none;
+      width: max-content;
+      height: max-content;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 5px;
+      color: goldenrod;
+      font-weight: 700;
+      font-size: 18px;
+      -webkit-transform: translateY(-50%);
+      -moz-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+      -o-transform: translateY(-50%);
+    }
+    &:last-child:hover {
+      color: white;
+    }
+  }
+}

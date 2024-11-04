@@ -13,8 +13,8 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import { habitTracker as initialHabits } from "../../../public/data";
 import Modal from "../../components/Modal/Modal";
 import AlertDialog from "../../components/ConfirmModal/AlertDialog";
+import Timer from "../../components/Timer/Timer";
 
-// Интерфейс для формы
 export interface Form {
   id: number;
   name: string;
@@ -32,6 +32,7 @@ function HabitTracker() {
   const [openCreate, setOpenCreate] = useState<boolean>(false);
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [isIndex, setIndex] = useState<number | null>(null);
+  const [isTimer, setTimer] = useState<boolean>(false);
 
   const handleCheckboxChange = (index: number) => {
     const updatedHabits = habitTracker.map((habit, i) => {
@@ -61,6 +62,14 @@ function HabitTracker() {
     <div className="HabitTracker">
       <header>
         <h3>My habits</h3>
+        <Button
+          sx={{ marginRight: "10px" }}
+          color="secondary"
+          variant="contained"
+          onClick={() => setTimer((prev) => !prev)}
+        >
+          Timer
+        </Button>
         <Button
           color="secondary"
           variant="contained"
@@ -103,7 +112,7 @@ function HabitTracker() {
                 <AccessTimeIcon sx={{ marginLeft: "5px" }} color="primary" />
               </li>
               <li>
-                Duration: {habit.duration}
+                Duration: {habit.duration} hours
                 <AccessAlarmIcon sx={{ marginLeft: "5px" }} color="secondary" />
               </li>
               <li>
@@ -124,6 +133,16 @@ function HabitTracker() {
         ) : (
           <div>No habits</div>
         )}
+        <div
+          style={{
+            position: "absolute",
+            left: "65%",
+            top: !isTimer ? "-300px" : "20px",
+            transition: "0.3s ease",
+          }}
+        >
+          <Timer setTimer={setTimer} />
+        </div>
       </main>
       <AlertDialog
         open={open}
