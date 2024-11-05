@@ -1,0 +1,48 @@
+$background-color: rgb(63, 63, 63);
+$text-color: white;
+$text-hover-color: rgb(252, 222, 184);
+$border-color: #7c007c;
+$box-shadow-color: rgba(97, 0, 136, 0.25);
+
+.profile {
+  padding: 40px;
+  margin: 16px 20px;
+  align-items: flex-start;
+  flex: 1;
+  gap: 16px;
+  width: 75vw;
+  min-height: 47vh;
+  border-radius: 40px;
+  border: 0 1px 1px 1px solid $border-color;
+  box-shadow: 0px 4px 4px 0px $box-shadow-color;
+  background-color: $background-color;
+  color: $text-color;
+  display: flex;
+  flex-direction: row;
+  div {
+    div:first-child {
+      position: relative;
+      img {
+        background-color: $text-hover-color;
+        box-shadow: 0 0 10px $text-hover-color;
+      }
+      button {
+        position: absolute;
+        left: 80px;
+        bottom: -5px;
+        border: 0;
+        background-color: inherit;
+        width: max-content;
+        height: max-content;
+      }
+    }
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    li {
+      margin-bottom: 10px;
+      color: $text-hover-color;
+    }
+  }
+}

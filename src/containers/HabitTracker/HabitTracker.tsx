@@ -12,7 +12,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import { habitTracker as initialHabits } from "../../../public/data";
 import Modal from "../../components/Modal/Modal";
-import AlertDialog from "../../components/ConfirmModal/AlertDialog";
+import AlertDialog from "../../components/ConfirmModal/ConfirmModal";
 import Timer from "../../components/Timer/Timer";
 
 export interface Form {

@@ -11,7 +11,7 @@ function LeftBar() {
       <li>Gamification</li>
       <li>Analytics</li>
       <li>Integration and notifications</li>
-      <li>User profile</li>
+      <li onClick={() => navigate("profile")}>My profile</li>
       <li>Help and support</li>
     </ul>
   );

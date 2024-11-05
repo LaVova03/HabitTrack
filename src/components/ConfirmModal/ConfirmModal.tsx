@@ -1,4 +1,4 @@
-import "./AlertDialog.scss";
+import "./ConfirmModal.scss";
 import React from "react";
 import Button from "@mui/material/Button";
 import Dialog from "@mui/material/Dialog";

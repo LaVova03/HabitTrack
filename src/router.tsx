@@ -5,6 +5,7 @@ import Auth from "./containers/Auth/Auth";
 import Home from "./containers/Home/Home";
 import BasicInformation from "./containers/BasicInformation/BasicInformation";
 import HabitTracker from "./containers/HabitTracker/HabitTracker";
+import MyProfile from "./containers/MyProfile/MyProfile";
 
 function AppRouter() {
   return (
@@ -17,6 +18,8 @@ function AppRouter() {
           <Route element={<PrivateRoute />}>
             <Route path="/main" element={<BasicInformation />} />
             <Route path="/tracker" element={<HabitTracker />} />
+
+            <Route path="/profile" element={<MyProfile />} />
           </Route>
         </Route>
 
