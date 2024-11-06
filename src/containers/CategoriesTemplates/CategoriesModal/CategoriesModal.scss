@@ -1,0 +1,34 @@
+.CategoriesModal {
+  position: relative;
+  flex: 1;
+  height: 332px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+
+  ul {
+    position: absolute;
+    list-style: none;
+    flex: 1;
+    padding: 0;
+    margin: 0;
+    width: 100% !important;
+    height: max-content;
+    transition: 300ms;
+    -webkit-transition: 300ms;
+    -moz-transition: 300ms;
+    -ms-transition: 300ms;
+    -o-transition: 300ms;
+}
+
+  li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 332px;
+    margin-bottom: 0 !important;
+    overflow: hidden;
+  }
+}

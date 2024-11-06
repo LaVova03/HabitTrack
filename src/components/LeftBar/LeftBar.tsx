@@ -7,7 +7,7 @@ function LeftBar() {
     <ul className="LeftBar">
       <li onClick={() => navigate("main")}>Basic information</li>
       <li onClick={() => navigate("tracker")}>Habit tracker</li>
-      <li>Categories and templates</li>
+      <li onClick={() => navigate("categories")}>Categories and templates</li>
       <li>Gamification</li>
       <li>Analytics</li>
       <li>Integration and notifications</li>

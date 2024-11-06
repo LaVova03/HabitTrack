@@ -1,6 +1,8 @@
 import "./ProfileForm.scss";
 import { Profile } from "../MyProfile";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useState } from "react";
 
 interface ProfileProp {
   setData: (newData: Partial<Profile>) => void;
@@ -8,28 +10,85 @@ interface ProfileProp {
 }
 
 function ProfileForm({ setData, isData }: ProfileProp) {
+  const [isNewData, setNewData] = useState<Profile>({
+    fullName: "",
+    age: "",
+    email: "",
+    profession: "",
+  });
+
+  const submit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    setData({
+      ...isData,
+      age:
+        isNewData.age && isNewData.age !== isData.age
+          ? isNewData.age
+          : isData.age,
+      fullName:
+        isNewData.fullName && isNewData.fullName !== isData.fullName
+          ? isNewData.fullName
+          : isData.fullName,
+      email:
+        isNewData.email && isNewData.email !== isData.email
+          ? isNewData.email
+          : isData.email,
+      profession:
+        isNewData.profession && isNewData.profession !== isData.profession
+          ? isNewData.profession
+          : isData.profession,
+    });
+
+    setNewData({
+      fullName: "",
+      age: "",
+      email: "",
+      profession: "",
+    });
+  };
+
   return (
-    <form className="profile_form">
+    <form onSubmit={submit} className="profile_form">
       <TextField
         type="text"
-        value={isData.fullName}
-        onChange={(e) => setData({ fullName: e.target.value })}
+        value={isNewData.fullName}
+        label="FullName"
+        onChange={(e) =>
+          setNewData((prev) => ({ ...prev, fullName: e.target.value }))
+        }
+        sx={{ marginBottom: "10px" }}
       />
       <TextField
         type="text"
-        value={isData.age}
-        onChange={(e) => setData({ age: e.target.value })}
+        value={isNewData.age}
+        label="Age"
+        onChange={(e) =>
+          setNewData((prev) => ({ ...prev, age: e.target.value }))
+        }
+        sx={{ marginBottom: "10px" }}
       />
       <TextField
         type="text"
-        value={isData.email}
-        onChange={(e) => setData({ email: e.target.value })}
+        value={isNewData.email}
+        label="Email"
+        onChange={(e) =>
+          setNewData((prev) => ({ ...prev, email: e.target.value }))
+        }
+        sx={{ marginBottom: "10px" }}
       />
       <TextField
         type="text"
-        value={isData.profession}
-        onChange={(e) => setData({ profession: e.target.value })}
+        value={isNewData.profession}
+        label="Profession"
+        onChange={(e) =>
+          setNewData((prev) => ({ ...prev, profession: e.target.value }))
+        }
+        sx={{ marginBottom: "10px" }}
       />
+      <Button type="submit" variant="contained" color="secondary">
+        Submit
+      </Button>
     </form>
   );
 }

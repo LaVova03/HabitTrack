@@ -6,6 +6,7 @@ import Home from "./containers/Home/Home";
 import BasicInformation from "./containers/BasicInformation/BasicInformation";
 import HabitTracker from "./containers/HabitTracker/HabitTracker";
 import MyProfile from "./containers/MyProfile/MyProfile";
+import CategoriesTemplates from "./containers/CategoriesTemplates/CategoriesTemplates";
 
 function AppRouter() {
   return (
@@ -20,6 +21,7 @@ function AppRouter() {
             <Route path="/tracker" element={<HabitTracker />} />
 
             <Route path="/profile" element={<MyProfile />} />
+            <Route path="/categories" element={<CategoriesTemplates />} />
           </Route>
         </Route>
 

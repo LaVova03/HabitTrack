@@ -11,7 +11,7 @@ import {
   TextField,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
-import { habitTracker } from "../../../public/data";
+import { habitTracker } from "../../data";
 import { Form } from "../../containers/HabitTracker/HabitTracker";
 import * as yup from "yup";
 

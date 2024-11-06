@@ -10,7 +10,7 @@ import CableIcon from "@mui/icons-material/Cable";
 import Checkbox from "@mui/material/Checkbox";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-import { habitTracker as initialHabits } from "../../../public/data";
+import { habitTracker as initialHabits } from "../../data";
 import Modal from "../../components/Modal/Modal";
 import AlertDialog from "../../components/ConfirmModal/ConfirmModal";
 import Timer from "../../components/Timer/Timer";

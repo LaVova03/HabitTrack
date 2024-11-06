@@ -44,7 +44,7 @@ function MyProfile() {
 
   return (
     <div className="profile">
-      <div>
+      <div style={{ width: "50%" }}>
         <div>
           <img
             src={isPhoto || Logo}
