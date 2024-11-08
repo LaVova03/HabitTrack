@@ -1,15 +1,7 @@
 import "./CategoriesTemplates.scss";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@mui/material";
 import CategoriesModal from "./CategoriesModal/CategoriesModal";
-
-// export interface Templates {
-//   Artist: string;
-//   Musician: string;
-//   Runner: string;
-//   Fitnes: string;
-//   Medical: string;
-// }
 
 function CategoriesTemplates() {
   const [isTemplates, setTemplates] = useState<string>("0");

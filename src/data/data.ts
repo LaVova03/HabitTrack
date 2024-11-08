@@ -1,7 +1,7 @@
 export const habitTracker = [
   {
     id: 1,
-    name: "Morning jog",
+    habit: "Morning jog",
     time: "7:00",
     duration: "1",
     periodicity: "every day",
@@ -9,7 +9,7 @@ export const habitTracker = [
   },
   {
     id: 2,
-    name: "Reading",
+    habit: "Reading",
     time: "13:00",
     duration: "1",
     periodicity: "every day",
@@ -17,7 +17,7 @@ export const habitTracker = [
   },
   {
     id: 3,
-    name: "Gym",
+    habit: "Gym",
     time: "18:00",
     duration: "1,5",
     periodicity: "every day",

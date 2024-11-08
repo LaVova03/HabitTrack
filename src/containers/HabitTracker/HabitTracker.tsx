@@ -3,26 +3,14 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@mui/material";
 import EditNoteIcon from "@mui/icons-material/EditNote";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import AccessAlarmIcon from "@mui/icons-material/AccessAlarm";
-import AccountTreeIcon from "@mui/icons-material/AccountTree";
-import CableIcon from "@mui/icons-material/Cable";
-import Checkbox from "@mui/material/Checkbox";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
-import { habitTracker as initialHabits } from "../../data";
+import { habitTracker as initialHabits } from "../../data/data";
 import Modal from "../../components/Modal/Modal";
 import AlertDialog from "../../components/ConfirmModal/ConfirmModal";
 import Timer from "../../components/Timer/Timer";
-
-export interface Form {
-  id: number;
-  name: string;
-  time: string;
-  duration: string;
-  periodicity: string;
-  status: boolean;
-}
+import ModalAddDescr from "./ModalAddDescr/ModalAddDescr";
+import { chooseImage } from "../../features/chooseImage";
 
 function HabitTracker() {
   const [habitTracker, setHabitTracker] = useState(initialHabits);
@@ -33,6 +21,8 @@ function HabitTracker() {
   const [openEdit, setOpenEdit] = useState<boolean>(false);
   const [isIndex, setIndex] = useState<number | null>(null);
   const [isTimer, setTimer] = useState<boolean>(false);
+  const [isAddDescr, setAddDescr] = useState<boolean>(false);
+  const [isAddDesIndex, setAddDesIndex] = useState<number | null>(null);
 
   const handleCheckboxChange = (index: number) => {
     const updatedHabits = habitTracker.map((habit, i) => {
@@ -48,7 +38,7 @@ function HabitTracker() {
     if (flag) {
       setFlag(false);
     }
-  }, [flag, initialHabits, habitTracker]);
+  }, [flag, habitTracker]);
 
   const ConfirmDeletHabit = () => {
     if (deleteItem === 0 || deleteItem) {
@@ -103,30 +93,39 @@ function HabitTracker() {
                   />
                 </div>
               </li>
+              {Object.entries(habit).map(([key, value], j) => {
+                if (key === "id") return null;
+
+                return (
+                  <li key={j}>
+                    {key === "status"
+                      ? `${key}: ${value ? "completed" : "not completed"}`
+                      : `${key}: ${value}`}
+                    {chooseImage({ key, habit, i, handleCheckboxChange })}
+                  </li>
+                );
+              })}
               <li>
-                Habit: {habit.name}
-                <AccountTreeIcon sx={{ marginLeft: "5px" }} color="success" />
-              </li>
-              <li>
-                At: {habit.time}
-                <AccessTimeIcon sx={{ marginLeft: "5px" }} color="primary" />
-              </li>
-              <li>
-                Duration: {habit.duration} hours
-                <AccessAlarmIcon sx={{ marginLeft: "5px" }} color="secondary" />
-              </li>
-              <li>
-                Periodicity: {habit.periodicity}
-                <CableIcon sx={{ marginLeft: "5px" }} color="primary" />
-              </li>
-              <li>
-                Status: {habit.status ? "completed" : "not completed"}
-                <Checkbox
-                  checked={habit.status}
-                  onChange={() => handleCheckboxChange(i)}
-                  color="success"
-                  sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-                />
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => {
+                    setAddDescr((prev) => !prev);
+                    setAddDesIndex(i);
+                  }}
+                >
+                  Add description
+                </Button>
+                {isAddDescr ? (
+                  <ModalAddDescr
+                    setAddDescr={setAddDescr}
+                    isAddDescr={isAddDescr}
+                    isAddDesIndex={isAddDesIndex}
+                    habitTracker={habitTracker}
+                    setHabitTracker={setHabitTracker}
+                    setFlag={setFlag}
+                  />
+                ) : null}
               </li>
             </ul>
           ))

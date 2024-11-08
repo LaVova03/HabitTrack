@@ -11,18 +11,18 @@ import {
   TextField,
 } from "@mui/material";
 import { TransitionProps } from "@mui/material/transitions";
-import { habitTracker } from "../../data";
-import { Form } from "../../containers/HabitTracker/HabitTracker";
+import { habitTracker } from "../../data/data";
+import { Form } from "../../types/habitForm";
 import * as yup from "yup";
 
 const getValidationSchema = () =>
   yup.object({
-    name: yup
+    habit: yup
       .string()
-      .required("Name is required")
+      .required("habit is required")
       .matches(
         /^[A-Za-z0-9 !@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]+$/,
-        "Invalid characters in name"
+        "Invalid characters in habit"
       ),
     time: yup
       .string()
@@ -67,7 +67,7 @@ function Modal({
 }: ModalProps) {
   const [formData, setFormData] = useState<Form>({
     id: habitTracker.length + 1,
-    name: "",
+    habit: "",
     time: "",
     duration: "",
     periodicity: "",
@@ -75,7 +75,7 @@ function Modal({
   });
   const [editFormData, setEditFormData] = useState<Form>({
     id: habitTracker.length + 1,
-    name: "",
+    habit: "",
     time: "",
     duration: "",
     periodicity: "",
@@ -87,7 +87,7 @@ function Modal({
     if (open && setOpen) {
       setFormData({
         id: habitTracker.length + 1,
-        name: "",
+        habit: "",
         time: "",
         duration: "",
         periodicity: "",
@@ -125,7 +125,7 @@ function Modal({
       }
       (open ? setFormData : setEditFormData)({
         id: habitTracker.length + 1,
-        name: "",
+        habit: "",
         time: "",
         duration: "",
         periodicity: "",
@@ -183,12 +183,12 @@ function Modal({
           >
             <TextField
               required
-              id="name"
+              id="habit"
               label="Habit Name"
               type="text"
-              value={open ? formData.name : editFormData.name}
+              value={open ? formData.habit : editFormData.habit}
               onChange={handleInputChange}
-              error={!!errors.name}
+              error={!!errors.habit}
               sx={{
                 marginLeft: "100px",
                 marginRight: "100px",

@@ -1,0 +1,48 @@
+$background-color: rgb(63, 63, 63);
+$text-color: white;
+$text-hover-color: rgb(252, 222, 184);
+$border-color: #7c007c;
+$box-shadow-color: rgba(97, 0, 136, 0.25);
+
+.Templates_cards {
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  ul {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: baseline;
+      padding: 30px 40px 20px;
+      height: max-content;
+      cursor: pointer;
+      border: 2px solid $text-hover-color;
+      border-radius: 40px;
+      -webkit-border-radius: 40px;
+      -moz-border-radius: 40px;
+      -ms-border-radius: 40px;
+      -o-border-radius: 40px;
+      transition: 200ms;
+      -webkit-transition: 200ms;
+      -moz-transition: 200ms;
+      -ms-transition: 200ms;
+      -o-transition: 200ms;
+      &:hover {
+        box-shadow: 0 0 15px $text-hover-color;
+      }
+      p {
+        margin: 0 0 5px 0;
+        display: flex;
+        align-items: center;
+      }
+    }
+  }
+}
