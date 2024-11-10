@@ -18,7 +18,6 @@ export const chooseImage = ({
   i,
   handleCheckboxChange,
 }: PropType) => {
-  console.log("Value of name:", key);
   switch (key) {
     case "habit":
       return <AccountTreeIcon sx={{ marginLeft: "5px" }} color="success" />;

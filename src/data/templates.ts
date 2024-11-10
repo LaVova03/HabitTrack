@@ -22,7 +22,7 @@ export const templates = [
   {
     Musician: [
       {
-        id: 1,
+        id: 3,
         habit: "play piano",
         time: "18:00",
         duration: "1",
@@ -30,7 +30,7 @@ export const templates = [
         status: false,
       },
       {
-        id: 2,
+        id: 4,
         habit: "singin",
         time: "18:00",
         duration: "1",
@@ -42,7 +42,7 @@ export const templates = [
   {
     Runner: [
       {
-        id: 1,
+        id: 5,
         habit: "Running",
         time: "18:00",
         duration: "1",
@@ -50,7 +50,7 @@ export const templates = [
         status: false,
       },
       {
-        id: 2,
+        id: 6,
         habit: "stretching",
         time: "18:00",
         duration: "1",
@@ -62,7 +62,7 @@ export const templates = [
   {
     Fitnes: [
       {
-        id: 1,
+        id: 7,
         habit: "gym",
         time: "18:00",
         duration: "1",
@@ -70,7 +70,7 @@ export const templates = [
         status: false,
       },
       {
-        id: 2,
+        id: 8,
         habit: "running",
         time: "18:00",
         duration: "2",
@@ -82,7 +82,7 @@ export const templates = [
   {
     Medical: [
       {
-        id: 1,
+        id: 9,
         habit: "procedure",
         time: "8:00",
         duration: "1",
@@ -90,7 +90,7 @@ export const templates = [
         status: false,
       },
       {
-        id: 2,
+        id: 10,
         habit: "appointment",
         time: "13:00",
         duration: "2",

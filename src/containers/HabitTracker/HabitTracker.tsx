@@ -7,10 +7,12 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import { habitTracker as initialHabits } from "../../data/data";
 import Modal from "../../components/Modal/Modal";
-import AlertDialog from "../../components/ConfirmModal/ConfirmModal";
+import AlertDialog from "../../components/ConfirmModal/AlertDialog";
 import Timer from "../../components/Timer/Timer";
 import ModalAddDescr from "./ModalAddDescr/ModalAddDescr";
 import { chooseImage } from "../../features/chooseImage";
+
+import { useAddTemplatesStore } from "../../slices/addTemplates";
 
 function HabitTracker() {
   const [habitTracker, setHabitTracker] = useState(initialHabits);
@@ -23,6 +25,8 @@ function HabitTracker() {
   const [isTimer, setTimer] = useState<boolean>(false);
   const [isAddDescr, setAddDescr] = useState<boolean>(false);
   const [isAddDesIndex, setAddDesIndex] = useState<number | null>(null);
+
+  const newHabits = useAddTemplatesStore((state) => state.newHabits);
 
   const handleCheckboxChange = (index: number) => {
     const updatedHabits = habitTracker.map((habit, i) => {
@@ -48,6 +52,19 @@ function HabitTracker() {
     }
   };
 
+  useEffect(() => {
+    if (newHabits && newHabits.length > 0) {
+      setHabitTracker((prevTracker) => {
+        const combined = [...prevTracker, ...newHabits];
+        const uniqueHabits = combined.filter(
+          (habit, index, self) =>
+            index === self.findIndex((h) => h.id === habit.id)
+        );
+        return uniqueHabits;
+      });
+    }
+  }, [newHabits]);
+
   return (
     <div className="HabitTracker">
       <header>
@@ -71,9 +88,9 @@ function HabitTracker() {
       <main>
         {habitTracker && habitTracker.length > 0 ? (
           habitTracker.map((habit, i) => (
-            <ul key={habit.id}>
+            <ul key={i}>
               <li>
-                <div>№: {habit.id}</div>
+                <div>№: {i + 1}</div>
                 <div>
                   <button
                     onClick={() => {

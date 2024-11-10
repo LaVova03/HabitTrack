@@ -3,12 +3,19 @@ import "./Templates.scss";
 import { templates } from "../../../../data/templates";
 import { Form, TemplatesProfession } from "../../../../types/habitForm";
 import { chooseImage } from "../../../../features/chooseImage";
+import { useAddTemplatesStore } from "../../../../slices/addTemplates";
 
 interface NameTemplate {
   nameTemplate: string;
 }
 
 function Templates({ nameTemplate }: NameTemplate) {
+  const addTemplates = useAddTemplatesStore((state) => state.addTemplates);
+
+  const handleClick = (item: Form): void => {
+    addTemplates(item);
+  };
+
   return (
     <div className="Templates_cards">
       {templates?.map((el, i) => {
@@ -18,7 +25,7 @@ function Templates({ nameTemplate }: NameTemplate) {
             <ul key={i}>
               {habits &&
                 habits.map((habit: Form) => (
-                  <li key={habit.id}>
+                  <li key={habit.id} onClick={() => handleClick(habit)}>
                     {Object.keys(habit).map((key, j) => {
                       if (key === "id") {
                         return null;
