@@ -6,7 +6,7 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
-import { Form } from "../HabitTracker";
+import { Form } from "../../../types/habitForm";
 
 interface AddDescr {
   setAddDescr: (value: boolean) => void;

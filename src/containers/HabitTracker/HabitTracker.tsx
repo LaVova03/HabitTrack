@@ -7,7 +7,7 @@ import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 
 import { habitTracker as initialHabits } from "../../data/data";
 import Modal from "../../components/Modal/Modal";
-import AlertDialog from "../../components/ConfirmModal/AlertDialog";
+import AlertDialog from "../../components/AlertDialog/AlertDialog";
 import Timer from "../../components/Timer/Timer";
 import ModalAddDescr from "./ModalAddDescr/ModalAddDescr";
 import { chooseImage } from "../../features/chooseImage";
@@ -16,7 +16,6 @@ import { useAddTemplatesStore } from "../../slices/addTemplates";
 
 function HabitTracker() {
   const [habitTracker, setHabitTracker] = useState(initialHabits);
-  const [flag, setFlag] = useState<boolean>(false);
   const [open, setOpen] = useState<boolean>(false);
   const [deleteItem, setDeleteItem] = useState<number | null>(null);
   const [openCreate, setOpenCreate] = useState<boolean>(false);
@@ -27,6 +26,8 @@ function HabitTracker() {
   const [isAddDesIndex, setAddDesIndex] = useState<number | null>(null);
 
   const newHabits = useAddTemplatesStore((state) => state.newHabits);
+  const setFlag = useAddTemplatesStore((state) => state.setFlag);
+  const flag = useAddTemplatesStore((state) => state.flag);
 
   const handleCheckboxChange = (index: number) => {
     const updatedHabits = habitTracker.map((habit, i) => {
@@ -42,12 +43,11 @@ function HabitTracker() {
     if (flag) {
       setFlag(false);
     }
-  }, [flag, habitTracker]);
+  }, [flag, habitTracker, setFlag]);
 
-  const ConfirmDeletHabit = () => {
+  const Confirm = () => {
     if (deleteItem === 0 || deleteItem) {
       habitTracker.splice(deleteItem, 1);
-      setFlag(true);
       setDeleteItem(null);
     }
   };
@@ -160,11 +160,7 @@ function HabitTracker() {
           <Timer setTimer={setTimer} />
         </div>
       </main>
-      <AlertDialog
-        open={open}
-        setOpen={setOpen}
-        ConfirmDeletHabit={ConfirmDeletHabit}
-      />
+      <AlertDialog open={open} setOpen={setOpen} Confirm={Confirm} />
       <Modal
         open={openCreate}
         openEdit={openEdit}

@@ -7,17 +7,23 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 
+import { useAddTemplatesStore } from "../../slices/addTemplates";
+
 interface AlertDialogProps {
   open: boolean;
   setOpen: (open: boolean) => void;
-  ConfirmDeletHabit: () => void;
+  Confirm: () => void;
+  isTemplates?: boolean;
 }
 
 export default function AlertDialog({
   open,
   setOpen,
-  ConfirmDeletHabit,
+  Confirm,
+  isTemplates,
 }: AlertDialogProps) {
+  const setFlag = useAddTemplatesStore((state) => state.setFlag);
+
   const handleClose = () => {
     setOpen(false);
   };
@@ -33,14 +39,17 @@ export default function AlertDialog({
         <DialogTitle id="alert-dialog-title">{"Confirm"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            Are you sure you want to break this habit?
+            {isTemplates
+              ? "Are you sure you want to add this habit?"
+              : "Are you sure you want to break this habit?"}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Disagree</Button>
           <Button
             onClick={() => {
-              ConfirmDeletHabit();
+              Confirm();
+              setFlag(true);
               handleClose();
             }}
             autoFocus

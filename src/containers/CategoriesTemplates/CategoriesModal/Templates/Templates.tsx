@@ -4,6 +4,8 @@ import { templates } from "../../../../data/templates";
 import { Form, TemplatesProfession } from "../../../../types/habitForm";
 import { chooseImage } from "../../../../features/chooseImage";
 import { useAddTemplatesStore } from "../../../../slices/addTemplates";
+import AlertDialog from "../../../../components/AlertDialog/AlertDialog";
+import { useState } from "react";
 
 interface NameTemplate {
   nameTemplate: string;
@@ -12,8 +14,14 @@ interface NameTemplate {
 function Templates({ nameTemplate }: NameTemplate) {
   const addTemplates = useAddTemplatesStore((state) => state.addTemplates);
 
-  const handleClick = (item: Form): void => {
-    addTemplates(item);
+  const [open, setOpen] = useState<boolean>(false);
+  const [item, setItem] = useState<Form | null>(null);
+
+  const Confirm = () => {
+    if (item) {
+      addTemplates(item);
+      setItem(null);
+    }
   };
 
   return (
@@ -25,7 +33,13 @@ function Templates({ nameTemplate }: NameTemplate) {
             <ul key={i}>
               {habits &&
                 habits.map((habit: Form) => (
-                  <li key={habit.id} onClick={() => handleClick(habit)}>
+                  <li
+                    key={habit.id}
+                    onClick={() => {
+                      setItem(habit);
+                      setOpen(true);
+                    }}
+                  >
                     {Object.keys(habit).map((key, j) => {
                       if (key === "id") {
                         return null;
@@ -49,6 +63,7 @@ function Templates({ nameTemplate }: NameTemplate) {
           return null;
         }
       })}
+      <AlertDialog open={open} setOpen={setOpen} Confirm={Confirm} isTemplates/>
     </div>
   );
 }
