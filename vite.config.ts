@@ -13,4 +13,7 @@ export default defineConfig({
       },
     },
   },
+  optimizeDeps: {
+    include: ["react-rating-stars-component"],
+  },
 });

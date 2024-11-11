@@ -5,7 +5,7 @@ export const habitTracker = [
     time: "7:00",
     duration: "1",
     periodicity: "every day",
-    status: false,
+    status: true,
   },
   {
     id: 12,
@@ -13,7 +13,7 @@ export const habitTracker = [
     time: "13:00",
     duration: "1",
     periodicity: "every day",
-    status: false,
+    status: true,
   },
   {
     id: 13,

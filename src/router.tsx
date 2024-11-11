@@ -7,6 +7,7 @@ import BasicInformation from "./containers/BasicInformation/BasicInformation";
 import HabitTracker from "./containers/HabitTracker/HabitTracker";
 import MyProfile from "./containers/MyProfile/MyProfile";
 import CategoriesTemplates from "./containers/CategoriesTemplates/CategoriesTemplates";
+import Gamification from "./containers/Gamification/Gamification";
 
 function AppRouter() {
   return (
@@ -22,6 +23,7 @@ function AppRouter() {
 
             <Route path="/profile" element={<MyProfile />} />
             <Route path="/categories" element={<CategoriesTemplates />} />
+            <Route path="/gamification" element={<Gamification />} />
           </Route>
         </Route>
 
