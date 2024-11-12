@@ -15,6 +15,7 @@ function ProfileForm({ setData, isData }: ProfileProp) {
     age: "",
     email: "",
     profession: "",
+    photo: "",
   });
 
   const submit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,6 +46,7 @@ function ProfileForm({ setData, isData }: ProfileProp) {
       age: "",
       email: "",
       profession: "",
+      photo: "",
     });
   };
 

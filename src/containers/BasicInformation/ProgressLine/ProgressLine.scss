@@ -1,0 +1,21 @@
+.ProgressLine {
+  width: max-content;
+  height: max-content;
+  h3 {
+    width: max-content;
+    margin: 0 auto;
+  }
+  ul {
+    display: flex;
+    flex-direction: row;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: max-content;
+    li {
+      width: 100px;
+      border-left: 4px solid black;
+      border-right: 4px solid black;
+    }
+  }
+}

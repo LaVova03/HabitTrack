@@ -15,3 +15,11 @@ export interface TemplatesProfession {
   Fitnes: string;
   Medical: string;
 }
+
+export interface Profile {
+  fullName: string;
+  age: string;
+  email: string;
+  profession: string;
+  photo: string;
+}

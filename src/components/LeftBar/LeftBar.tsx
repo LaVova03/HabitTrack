@@ -12,7 +12,7 @@ function LeftBar() {
       <li>Analytics</li>
       <li>Integration and notifications</li>
       <li onClick={() => navigate("profile")}>My profile</li>
-      <li>Help and support</li>
+      <li onClick={() => navigate("support")}>Help and support</li>
     </ul>
   );
 }

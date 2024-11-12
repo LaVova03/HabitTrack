@@ -3,23 +3,18 @@ import { useRef, useState, ChangeEvent } from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
 import Logo from "../../assets/profile/person.png";
 import ProfileForm from "./ProfileForm/ProfileForm";
-
-export interface Profile {
-  fullName: string;
-  age: string;
-  email: string;
-  profession: string;
-}
+import { user } from "../../data/userData";
+import { Profile } from "../../types/habitForm";
 
 function MyProfile() {
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const [isPhoto, setPhoto] = useState<string | null>(null);
   const [isData, setData] = useState<Profile>({
-    fullName: "fullName",
-    age: "age",
-    email: "email",
-    profession: "profession",
+    fullName: user?.fullName || "",
+    age: user?.age || "",
+    email: user?.email || "",
+    profession: user?.profession || "",
+    photo: user?.photo || "",
   });
 
   const handleButtonClick = () => {
@@ -31,7 +26,7 @@ function MyProfile() {
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      setPhoto(URL.createObjectURL(file));
+      setData((prev) => ({ ...prev, photo: URL.createObjectURL(file) }));
     }
   };
 
@@ -47,7 +42,7 @@ function MyProfile() {
       <div style={{ width: "50%" }}>
         <div>
           <img
-            src={isPhoto || Logo}
+            src={isData.photo || Logo}
             alt="user_photo"
             style={{
               width: "100px",
@@ -74,9 +69,14 @@ function MyProfile() {
         </div>
         <ul>
           {isData.fullName
-            ? Object.keys(isData).map((key) => (
-                <li key={key}>{`${key}: ${isData[key as keyof Profile]}`}</li>
-              ))
+            ? Object.keys(isData).map((key) => {
+                if (key === "photo") {
+                  return null;
+                }
+                return (
+                  <li key={key}>{`${key}: ${isData[key as keyof Profile]}`}</li>
+                );
+              })
             : null}
         </ul>
       </div>
