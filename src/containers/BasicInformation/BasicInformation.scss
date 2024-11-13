@@ -5,10 +5,10 @@ $border-color: #7c007c;
 $box-shadow-color: rgba(97, 0, 136, 0.25);
 
 .BasicInformation {
+  display: flex;
+  flex-direction: row;
   padding: 40px;
   margin: 16px 20px;
-  align-items: flex-start;
-  flex: 1;
   gap: 16px;
   width: 75vw;
   min-height: 47vh;
@@ -16,30 +16,35 @@ $box-shadow-color: rgba(97, 0, 136, 0.25);
   border: 0 1px 1px 1px solid $border-color;
   box-shadow: 0px 4px 4px 0px $box-shadow-color;
   background-color: $background-color;
-  float: left;
   color: $text-color;
-  ul {
-    margin: 0 0 80px 0;
-    padding: 0;
-    list-style: none;
-    width: max-content;
-    color: $text-hover-color;
-    li {
-      margin-bottom: 10px;
+  div:nth-of-type(1) {
+    width: 60%;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
       width: max-content;
-      img {
-        float: left;
-        width: 150px;
-        height: 150px;
-        background-color: $text-hover-color;
-        box-shadow: 0 0 10px $text-hover-color;
-        object-fit: cover;
-        background-position: 10px;
-        border-radius: 50%;
-        -webkit-border-radius: 50%;
-        -moz-border-radius: 50%;
-        -ms-border-radius: 50%;
-        -o-border-radius: 50%;
+      color: $text-hover-color;
+      &:first-child {
+        margin-top: 50px;
+      }
+      li {
+        margin-bottom: 10px;
+        width: max-content;
+        img {
+          float: left;
+          width: 150px;
+          height: 150px;
+          background-color: $text-hover-color;
+          box-shadow: 0 0 10px $text-hover-color;
+          object-fit: cover;
+          background-position: 10px;
+          border-radius: 50%;
+          -webkit-border-radius: 50%;
+          -moz-border-radius: 50%;
+          -ms-border-radius: 50%;
+          -o-border-radius: 50%;
+        }
       }
     }
   }

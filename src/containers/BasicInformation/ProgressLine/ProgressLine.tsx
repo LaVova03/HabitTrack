@@ -31,7 +31,7 @@ function ProgressLine() {
 
   return (
     <div className="ProgressLine">
-      <h3>Progress</h3>
+      <label>Progress</label>
       <ul>
         {isData.length > 0 ? (
           isData.map((el, i) => (
@@ -40,10 +40,10 @@ function ProgressLine() {
                 border: el.status ? "2px solid gold" : "2px solid gray",
                 borderLeft: "4px solid black",
                 borderRight: "4px solid black",
+                width: "100px",
               }}
               key={i}
-            >
-            </li>
+            ></li>
           ))
         ) : (
           <li>Нет данных о привычках</li>
